@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+	<h4 style="text-align: center">{{title}}</h4>
+
+	<form method="post" action="">
+	{% csrf_token %}
+
+	<table class="table table-bordered">
+		{{userform.as_table}}
+  	</table>
+
+  	<input type="submit" class="btn btn-warning" style="float: right;" value="Update Employee">
+  	</form>
+</div>
+	
+	
+{% endblock %}
+
+<!-- <h2>{{title}}</h2>
+	<form method="post" action="">
+		{% csrf_token %}
+		<p>{{userform.as_p}}</p>
+		<input type="submit" value="Update Employees">
+	</form> -->

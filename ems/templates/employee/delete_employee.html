@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container-fluid">
+	<h4 style="text-align: left;font-weight: bold;">{{title}}</h4>
+	<h5>Hello {{user.username}}</h3>
+	<form method="post" action="">
+		{% csrf_token %}
+		<p>Are you sure to delete this Employee</p>
+		<input type="submit" value="Yes" class="btn btn-danger">
+	</form>
+	</div>
+	
+{% endblock %}

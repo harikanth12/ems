@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+	<h2 style="font-weight: bold;">List of {{title}}</h2>
+	<table class="table table-bordered">
+		{% if questions %}
+		<tbody>
+			{% for i in questions %}
+			<tr>
+				<td><a href="{% url 'polls_details' id=i.id %}">{{i.title|title}}</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		{% else %}
+		<tr>
+			<td><h5 style="color:red;">No Polls are avialble</h5></td>
+		</tr>
+		{% endif %}
+	</table>
+	
+</div>
+{% endblock %} 
+
+
+
+<!-- <ul>
+		{% if questions %}
+		{% for i in questions %}
+		<li><a href="{% url 'polls_details' id=i.id %}">{{i.title}}</a></li>
+		{% endfor %}
+		{% else %}
+			<p>No Polls are avialble </p>
+		{% endif %}
+	</ul> -->

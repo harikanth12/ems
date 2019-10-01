@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container-fluid">
+	<h2>{{questions.title}}</h2>
+	<table class="table table-bordered col-4">
+		{% for choice in questions.hari %}
+		<tr>
+			<td><a href="{% url 'singlepoll' id=questions.id %}">{{choice.title}}</a> <span class="badge badge-info" style="float: right;">{{choice.votes}}</span></td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td>There is no choices are available</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<p> <span style="font-weight: bold;">Created by:</span><span>{{questions.created_by|title}}</span></p>
+	
+	</div>
+{% endblock %}
+
+
+
+<!-- <ul>
+		<h2>{{questions.title}}</h2>
+		{% for choice in questions.hari %}
+			<p>{{choice.title}} ({{choice.votes}})</p>
+		{% empty %}
+			<p>There is no choices are available</p>
+		{% endfor %}
+		<p>The Poll is Created by {{questions.created_by}}</p>
+	</ul> -->

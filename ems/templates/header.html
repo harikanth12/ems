@@ -1,0 +1,31 @@
+<div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color:#2e7f8b !important">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">EMS</a>
+  
+  <!-- Links -->
+  <div style="float: left;width:90%;">
+  <ul class="navbar-nav">
+    <li class="nav-item" >
+      <a class="nav-link" href="{% url 'employees_list' %}" style="color:#fffefb;">Employee</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'polls_list' %}" style="color:#fffefb;">Polls <span class="badge badge-light" >{{polls_count}}</span></a>
+    </li>
+  </ul>
+</div>
+<div style="float: right;width:10%;">
+  <ul class="navbar-nav nav-right">
+    {% if user.is_authenticated %}
+    <li class="nav-item" style="color:#fffefb;margin: 4%;">{{user.username|upper}}</li>
+    <form method="post" action="{% url 'user_logout' %}">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Logout">
+  </form>
+  {% endif %}
+  </ul>
+</div>
+ 
+</nav>
+
+</div>

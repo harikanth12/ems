@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+	<h4 style="text-align: center">{{title}}</h4>
+		<table class="table table-bordered table-striped">
+			<tbody>
+				<tr>
+					<td>First Name:</td>
+					<td>{{details.first_name}}</td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td>{{details.last_name}}</td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td>{{details.email}}</td>
+				</tr>
+				<tr>
+					<td>Salary:</td>
+					<td>{{details.profile.salary}}</td>
+				</tr>
+				<tr>
+					<td>Designation:</td>
+					<td>{{details.profile.designation}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p style="float: right;">
+			<a href="{% url 'edit_employees' id=details.id %}" class="btn btn-warning" >Edit</a> 
+			<a href="{% url 'delete_employees' id=details.id %}" class="btn btn-danger">Delete</a>
+		</p>
+	
+	</div>
+	<!-- <h2>{{title}}</h2>
+
+	<ul>
+		<p><span style="font-weight:bold">First Name:</span> <span>{{details.first_name}}</span></p>
+		<p><span style="font-weight:bold">Last Name:</span> <span>{{details.last_name}}</span></p>
+		<p><span style="font-weight:bold">Email:</span> <span>{{details.email}}</span></p>
+		<p><span style="font-weight:bold">Salary:</span> <span>{{details.profile.salary}}</span></p>
+		<p><span style="font-weight:bold">Designation:</span> <span>{{details.profile.designation}}</span></p>
+	</ul> -->
+
+	
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div class="containe-fluid">
+<!-- 		<div class="row">
+		<div class="col-sm-10">
+  <h2 style="font-weight: bold;">List of {{title}}</h2>
+</div>
+<div class="col-sm-2">
+  {% if request.role == 'Admin' %}
+	<a href="{% url 'add_employees' %}" class='btn btn-success'>Add Employees</a>
+	{% endif %}
+</div>
+</div> -->
+
+	<div class="row">
+		<div class="col-sm-6">
+			<span style="font-weight: bold; font-size: 25px;">List of {{title}}</span>
+			{% if request.role == 'Admin' %}
+				<a href="{% url 'add_employees' %}" class='btn btn-success' style="float:right; margin-bottom: 10px;">Add Employees</a>
+			{% endif %}
+			
+  <table class="table table-bordered">
+  	{% if employeelist %}   
+    <thead>
+      <tr style="background-color: black;color:white;">
+        <th style="width:50%;">Name</th>
+        <th style="width:50%;text-align: center;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    	
+    	{% for i in employeelist %}
+    	<tr>
+    	
+		
+		<td ><span style="font-weight: bold;">{{i.username|title}}</span> <span style="font-size:12px;">{{i.email}}</span></td>
+		<td style="text-align: center;"><a href="{% url 'employees_details' id=i.id %}" class="btn btn-info" role="button">Details</a>
+			<a href="{% url 'edit_employees' id=i.id %}" class="btn btn-warning" role="button">Edit</a>
+			<a href="{% url 'delete_employees' id=i.id %}" class="btn btn-danger" role="button">Delete</a>
+		 </td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<td><h5>No Employees are avialble</h5></td>
+		</tr>
+		
+    </tbody>
+    {% endif %}
+  </table>
+</div><!---col table -- 6-->
+<div class="col-sm-6">
+	<h3 style="font-weight: bold;">Recent Posts</h3>
+	<table class="table table-bordered col-sm-6">
+		{% if questions %}
+		<tbody>
+			{% for i in questions %}
+			<tr>
+				<td><a href="{% url 'polls_details' id=i.id %}">{{i.title|title}}</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		{% else %}
+		<tr>
+			<td><h5 style="color:red;">No Polls are avialble</h5></td>
+		</tr>
+		{% endif %}
+	</table>
+</div>
+</div><!----row--->
+  </div>
+{% endblock %}
+
+
+
+
+
+	<!-- <div>
+	
+	{% if request.role == 'Admin' %}
+	<a href="{% url 'add_employees' %}">Add Employees</a>
+	{% endif %}
+	</div>
+	<ul>
+		{% if employeelist %}
+		{% for i in employeelist %}
+		<li><span style="font-weight: bold;">{{i.username}} </span>&nbsp;<a href="{% url 'employees_details' id=i.id %}">Details</a> <a href="{% url 'edit_employees' id=i.id %}">Edit</a> <a href="{% url 'delete_employees' id=i.id %}">Delete</a></li>
+		{% endfor %}
+		{% else %}
+			<p>No Employees are avialble </p>
+		{% endif %}
+	</ul> -->

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+	<h4 style="text-align: center;font-weight: bold;">{{title}}</h4>
+	<h2 style="font-weight: bold;">{{questions.title}}?</h2>
+	<form method="post" action="">
+		{% csrf_token %}
+	<table>
+		{% for choice in questions.hari %}
+		<tr>
+			<td><input type="radio" name="choice" value="{{choice.id}}"> <label>{{choice.title}}</label></td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td>There is no choices are available</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<button type="submit" class="btn btn-info">Vote</button>
+	</form>
+	
+</div>
+{% endblock %}
+
+
+<!-- <ul>
+		
+		<form method="post" action="">
+			{% csrf_token %}
+		{% for choice in questions.hari %}
+			<input type="radio" name="choice" value="{{choice.id}}">
+			<label>{{choice.title}}</label>
+		{% empty %}
+			<p>There is no choices are available</p>
+		{% endfor %}
+		<button type="submit">Vote</button>
+		</form>
+		<p>The Poll is Created by {{questions.created_by}}</p>
+	</ul> -->
