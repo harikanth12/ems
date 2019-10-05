@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from employee.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -26,4 +28,5 @@ urlpatterns = [
     url(r'^login/',user_login,name='user_login'),
     url(r'^sucess/',sucess,name='sucess'),
     url(r'^logout/',user_logout,name='user_logout')
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+

@@ -8,6 +8,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	designation = models.CharField(null=False,blank=False,max_length=25)
 	salary=models.IntegerField(null=True,blank=True)
+	profile_picture = models.ImageField(upload_to='profilePicture/',max_length=255,null=True,blank=True)
 
 	class Meta:
 		ordering = ('-salary',)
@@ -19,18 +20,24 @@ class New_user(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	department = models.CharField(null=False,blank=False,max_length=25)
 
-@receiver(post_save,sender=User)
-def create_profile(sender,instance,created,**kwargs):
-	# print("created Profile")
-	# print(created,"created")
-	# print(instance,"instance")
-	if created:
-		Profile.objects.create(user=instance)
+# @receiver(post_save,sender=User)
+# def create_profile(sender,instance,created,**kwargs):
+# 	# print("created Profile")
+# 	# print(created,"created")
+# 	# print(instance,"instance")
+
+# 	if created:
+# 		profile=Profile(user=instance)
 
 
-@receiver(post_save,sender=User)
-def save_profile(sender,instance,**kwargs):
-	# print("Sa veProfile")
-	# print(instance,"instance")
-	instance.profile.save()
+
+		
+
+
+
+# @receiver(post_save,sender=User)
+# def save_profile(sender,instance,**kwargs):
+# 	# print("Sa veProfile")
+# 	# print(instance,"instance")
+# 	instance.profile.save()
 

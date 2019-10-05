@@ -4,11 +4,12 @@
 <div class="container">
 	<h4 style="text-align: center">{{title}}</h4>
 
-	<form method="post" action="">
+	<form method="post" action="" enctype="multipart/form-data">
 	{% csrf_token %}
 
 	<table class="table table-bordered">
 		{{userform.as_table}}
+		{{profile.as_table}}
   	</table>
 
   	<input type="submit" class="btn btn-success" style="float: right;" value="Add Employees">

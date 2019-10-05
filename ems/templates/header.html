@@ -1,13 +1,15 @@
+{% load poll_extras %}
+
 <div>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color:#2e7f8b !important">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#">EMS</a>
+  <a class="navbar-brand" href="#">{{"ems" | upper}}</a>
   
   <!-- Links -->
   <div style="float: left;width:90%;">
   <ul class="navbar-nav">
     <li class="nav-item" >
-      <a class="nav-link" href="{% url 'employees_list' %}" style="color:#fffefb;">Employee</a>
+      <a class="nav-link" href="{% url 'employees_list' %}" style="color:#fffefb;">{{"employee" | capfirst}}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'polls_list' %}" style="color:#fffefb;">Polls <span class="badge badge-light" >{{polls_count}}</span></a>

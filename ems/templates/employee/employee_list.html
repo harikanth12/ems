@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load poll_extras %}
 
 {% block content %}
 
@@ -42,6 +43,7 @@
 		 </td>
 		</tr>
 		{% endfor %}
+
 		{% else %}
 		<tr>
 			<td><h5>No Employees are avialble</h5></td>
@@ -50,10 +52,12 @@
     </tbody>
     {% endif %}
   </table>
+{% include 'employee/paginator.html' with page=employeelist %}
 </div><!---col table -- 6-->
 <div class="col-sm-6">
 	<h3 style="font-weight: bold;">Recent Posts</h3>
 	<table class="table table-bordered col-sm-6">
+		{% recent_polls as questions %}
 		{% if questions %}
 		<tbody>
 			{% for i in questions %}
@@ -68,6 +72,29 @@
 		</tr>
 		{% endif %}
 	</table>
+
+	{% if request.role == "Admin" or request.role == "HR"%}
+	<h3 style="font-weight: bold;">Recent Employees</h3>
+	<table class="table table-bordered col-sm-6">
+		
+		{% recent_employee 3 as user %}
+		{% if user %}
+		<tbody>
+			{% for i in user %}
+			<tr>
+				<td><a href="{% url 'employees_details' id=i.id %}">{{i.username|title}}</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		{% else %}
+		<tr>
+			<td><h5 style="color:red;">No recent Employees</h5></td>
+		</tr>
+		{% endif %}
+
+	</table>
+	{% endif %}
+
 </div>
 </div><!----row--->
   </div>

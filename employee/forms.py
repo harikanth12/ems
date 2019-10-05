@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User,Group
+from employee.models import Profile
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput)
 	role = forms.ModelChoiceField(queryset=Group.objects.all())
-	print(role)
 
-	class Meta:
+	class Meta: 
 		model = User
 		fields = ['first_name','last_name','email','password','username','role']
 
@@ -16,8 +16,8 @@ class UserForm(forms.ModelForm):
 		print(kwargs,"inital")
 		if kwargs.get('instance'):
 			initial = kwargs.setdefault('initial',{})
-			print(kwargs)
-			print(kwargs['instance'].groups.all())
+			# print(kwargs)
+			# print(kwargs['instance'].groups.all())
 			if kwargs['instance'].groups.all():
 				initial['role'] = kwargs['instance'].groups.all()[0]
 				print(initial['role'])
@@ -32,6 +32,9 @@ class UserForm(forms.ModelForm):
 		u = super().save()
 		u.groups.set([role])
 		u.set_password(password)
-		u.save()
 		return u
 		
+class ProfileForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		fields = ['profile_picture',]

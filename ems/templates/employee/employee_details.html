@@ -6,24 +6,32 @@
 		<table class="table table-bordered table-striped">
 			<tbody>
 				<tr>
-					<td>First Name:</td>
+					<th>First Name:</th>
 					<td>{{details.first_name}}</td>
 				</tr>
 				<tr>
-					<td>Last Name:</td>
+					<th>Last Name:</th>
 					<td>{{details.last_name}}</td>
 				</tr>
 				<tr>
-					<td>Email:</td>
+					<th>Email:</th>
 					<td>{{details.email}}</td>
 				</tr>
 				<tr>
-					<td>Salary:</td>
+					<th>Salary:</th>
 					<td>{{details.profile.salary}}</td>
 				</tr>
 				<tr>
-					<td>Designation:</td>
+					<th>Designation:</th>
 					<td>{{details.profile.designation}}</td>
+				</tr>
+				<tr>
+					<th>Profile Picture:</th>
+					<td>
+						{% if details.profile.profile_picture %}
+						<img src="{{details.profile.profile_picture.url}}" height=100px;>
+						{% endif %}
+					</td>
 				</tr>
 			</tbody>
 		</table>

@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from employee.decorators import admin_only
 from poll.models import Question
-
+from employee.forms import ProfileForm
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # Create your views here.
 
 def user_login(request):
@@ -50,6 +51,15 @@ def employee_list(request):
 	context = {}
 	context['title'] = "Employees"
 	user = User.objects.all()
+	paginator = Paginator(user,5)
+	page_number = request.GET.get('page')
+	try:
+		user = paginator.page(page_number)
+	except PageNotAnInteger:
+		user = paginator.page(1)
+	except EmptyPage:
+		user = paginator.page(paginator.num_pages)
+		
 	context['employeelist'] = user
 	question = Question.objects.all().order_by('-created_at')
 	context['questions'] = question
@@ -74,15 +84,26 @@ def add_employees(request):
 	context['title'] = "Adding Employees"
 	if request.method == "POST":
 		user_form = UserForm(request.POST)
+
+		profile = ProfileForm(request.POST,request.FILES)
+
 		context['userform']= user_form
-		if user_form.is_valid():
-			u=user_form.save()
+		context['profile']= profile
+		if user_form.is_valid() and profile.is_valid():
+			user=user_form.save()
+
+			profile = profile.save(commit=False)
+			profile.user = user
+			profile.save()
+			
 			return HttpResponseRedirect(reverse('employees_list'))
 		else:
 			return render(request,'employee/add_employees.html',context)
 	else:
 		user_form = UserForm()
+		profile_form = ProfileForm()
 		context['userform']= user_form
+		context['profile']=profile_form
 	return render(request,'employee/add_employees.html',context)
 
 @login_required(login_url='/login/')
@@ -92,15 +113,22 @@ def edit_employee(request,id=None):
 	user = get_object_or_404(User,id=id)
 	if request.method == "POST":
 		user_form = UserForm(request.POST,instance=user)
+		profile = ProfileForm(request.POST,request.FILES,instance=user.profile)
 		context['userform'] = user_form
-		if user_form.is_valid():
-			u=user_form.save()
+		context['profile']= profile
+		if user_form.is_valid() and profile.is_valid() :
+			user=user_form.save()
+			profile = profile.save(commit=False)
+			profile.user = user
+			profile.save()
 			return HttpResponseRedirect(reverse('employees_list'))
 		else:
 			return render(request,'employee/edit_employee.html',context)
 	else:
 		user_form = UserForm(instance=user)
+		profile_form = ProfileForm(instance=user.profile)
 		context['userform'] = user_form
+		context['profile'] = profile_form
 	return render(request,'employee/edit_employee.html',context)
 
 
