@@ -25,7 +25,7 @@ SECRET_KEY = '#ol_p&fqjg*2y#ab1b$r1=6yv4z)t21l_)c!e&j8rgw02mi(cd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['emsdjangoapp.herokuapp.com']
 
 
 # Application definition
