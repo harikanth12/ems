@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^polls/',include('poll.urls')),
     url(r'^employee/',include('employee.urls')),
-    url(r'',home,name='home'),
+    url(r'^$',home,name='home'),
 
     url(r'^login/',user_login,name='user_login'),
     url(r'^sucess/',sucess,name='sucess'),
