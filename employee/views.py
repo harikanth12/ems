@@ -10,6 +10,12 @@ from employee.forms import ProfileForm
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # Create your views here.
 
+def home(request):
+	context = {}
+	context['title'] = 'home'
+	return render(request,'employee/home.html',context)
+
+
 def user_login(request):
 	context = {}
 	context['title'] = "Login Page"
