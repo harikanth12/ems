@@ -29,10 +29,11 @@ class UserForm(forms.ModelForm):
 	def save(self):
 		password = self.cleaned_data.pop('password')
 		role = self.cleaned_data.pop('role')
-		u = super().save()
-		u.groups.set([role])
-		u.set_password(password)
-		return u
+		user = super().save()
+		user.groups.set([role])
+		user.set_password(password)
+		user.save()
+		return user
 		
 class ProfileForm(forms.ModelForm):
 	class Meta:

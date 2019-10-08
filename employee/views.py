@@ -23,6 +23,7 @@ def user_login(request):
 		username = request.POST['username']
 		password = request.POST['password']
 		user = authenticate(request,username=username,password=password)
+		print(user,"user")
 		if user:
 			login(request,user)
 			if request.GET.get('next',None):
