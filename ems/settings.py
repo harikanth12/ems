@@ -123,7 +123,7 @@ USE_TZ = True
 
 ADMIN_MEDIA_PREFIX = '/static/admin/' 
 
-STATIC_ROOT = [os.path.join(BASE_DIR,'staticfiles')]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 
 
