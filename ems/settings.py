@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # added this file to diplay the django ui part visible in the production .... pip3 install the whitenoise
     'employee.middlewares.RoleMiddleWare',
 ]
 
@@ -121,8 +121,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-ADMIN_MEDIA_PREFIX = '/static/admin/' 
 
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
